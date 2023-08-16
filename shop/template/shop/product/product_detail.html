@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block content %}
+<section class="main news-detail">
+    <div class="container" style="padding:0px 25px;">
+        <div class="row bg-body-tertiary" style="padding:20px;">
+            <div class="col-lg-6"><img src="{{product.image.url}}" style="width:100%;"></div>
+            <div class="col-lg-6">
+                <h2>{{ product.title }}</h2>
+                <hr>
+                <ul>
+                    <li>Фирма : {{ product.firm }}</li>
+                    <li>{{ product.human }}</li>
+                    <li><b>Цена : {{ product.price }} ₽</b></li>
+                </ul>
+                <hr>
+                {% if size_list %}
+                <h5>Допустимые размеры</h5>
+                    <select class="form-select" aria-label="Default select example">
+                        {% for size in size_list %}
+                        <option value="{{size.size}}">{{size.size}}</option>
+                        {% endfor %}
+                    </select>
+                <button class="w-50 btn btn-warning mt-4" type="submit">Добавить в корзину</button>
+                {% else %}
+                На данный момент товара нет в наличии
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+
+
+{% endblock content %}

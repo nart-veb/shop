@@ -1,0 +1,44 @@
+
+header .authorization{
+	padding-left: 30px;
+}
+.main{
+	margin-top:50px;
+}
+.main .card{
+	border: none;
+	-webkit-box-shadow: 0px 0px 8px 0px rgba(34, 60, 80, 0.2); 
+-moz-box-shadow: 0px 0px 8px 0px rgba(34, 60, 80, 0.2); 
+box-shadow: 0px 0px 8px 0px rgba(34, 60, 80, 0.2);
+}
+.main .card img{
+	height: 250px; 
+	width: 100%; 
+	display: block;
+}
+
+._form .col-lg-4{
+	margin-top: 15px;
+}
+._form button{
+	
+	font-size: .875rem;
+	margin: 0px;
+	padding: 4px 15px;
+}
+
+.form-signin {
+width: 100%;
+max-width: 330px;
+padding: 15px;
+margin: auto;
+}
+
+.main .form-floating{
+	margin: 10px 0px;
+}
+.news-detail ul li{
+font-size:18px;
+margin:10px 0px;
+}
+
