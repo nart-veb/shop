@@ -68,7 +68,9 @@
                 <div class="card-body text-center">
                   <p>{{product.title}}</p>
                   <p><b>{{product.price}} руб.</b></p>
-                  <a class="btn btn-outline-success" href="{{product.id}}/">Посмотреть</a>
+                  <a class="btn btn-outline-success"
+                     href="{% url 'product-detail' category=product.category.title product_id=product.id %}"
+                  >Посмотреть</a>
                 </div>
               </div>
             </div>
