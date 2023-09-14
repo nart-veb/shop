@@ -8,6 +8,8 @@
         <div class="row bg-body-tertiary" style="padding:20px;">
             <div class="col-lg-6"><img src="{{product.image.url}}" style="width:100%;"></div>
             <div class="col-lg-6">
+                <form method="post" action="{% url 'product-save' %}">
+                    {% csrf_token %}
                 <h2>{{ product.title }}</h2>
                 <hr>
                 <ul>
@@ -18,15 +20,20 @@
                 <hr>
                 {% if size_list %}
                 <h5>Допустимые размеры</h5>
-                    <select class="form-select" aria-label="Default select example">
+                    <select class="form-select" aria-label="Default select example" name="size">
                         {% for size in size_list %}
                         <option value="{{size.size}}">{{size.size}}</option>
                         {% endfor %}
                     </select>
-                <button class="w-50 btn btn-warning mt-4" type="submit">Добавить в корзину</button>
+                    {% if user.is_authenticated %}
+                    <button class="w-50 btn btn-warning mt-4" type="submit">Добавить в корзину</button>
+                    {% else %}
+                    <button class="w-50 btn btn-warning mt-4" onclick="document.location='{% url 'login'%}?next={{request.path}}'" type="submit">Добавить в корзину</button>
+                    {% endif %}
                 {% else %}
                 На данный момент товара нет в наличии
                 {% endif %}
+                    </form>
             </div>
         </div>
     </div>

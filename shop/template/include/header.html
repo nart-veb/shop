@@ -37,13 +37,23 @@
             <button class="btn btn-outline-success" type="submit">Поиск</button>
           </form>
 
+
           <div class="authorization">
-            <button onclick="document.location='{% url 'login' %}'" class="btn btn-outline-warning"
-                    type="submit">Вход
+            {% if user.is_authenticated %}
+              <button onclick="document.location='{% url 'logout'%}?next={{request.path}}'" class="btn btn-outline-danger"
+                    type="submit">Выход
+              </button>
+            <button onclick="document.location='{% url 'basket' %}'"
+                    class="btn btn-outline-warning" type="submit">Корзина
             </button>
+              {% else %}
+              <button onclick="document.location='{% url 'login'%}'" class="btn btn-outline-warning"
+                    type="submit">Вход
+              </button>
             <button onclick="document.location='{% url 'registration' %}'"
                     class="btn btn-outline-dark" type="submit">Регистрация
             </button>
+              {% endif %}
           </div>
 
         </div>

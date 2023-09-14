@@ -1,8 +1,10 @@
 from django.shortcuts import render, get_object_or_404
 from django.views.generic.base import View
 from django.views.generic import ListView, DetailView
-from .models import Product, Stock
-from django.db.models import Q
+from .models import Product, Stock,CardItem, Basket
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.http import HttpResponse
+
 
 
 class IndexView(View):
@@ -52,3 +54,36 @@ class DetailProduct(DetailView):
     template_name = 'shop/product/product_detail.html'
     context_object_name = 'product'
     pk_url_kwarg = 'product_id'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        size_list = Stock.objects.filter(product=self.kwargs.get("product_id"), count__gt=0)
+        context['size_list'] = size_list
+        return context
+
+
+class BasketView(LoginRequiredMixin, View):
+    login_url = '/accounts/login/'
+
+    def get(self, request):
+        basket = Basket.objects.get(user=self.request.user)
+        card_item = CardItem.objects.filter(basket=basket)
+        # return HttpResponse(f'Thank you {self.request.user.id} {card_item}')
+        return render(request, 'shop/basket.html', {'card_item_list': card_item})
+
+
+class ProductSave(LoginRequiredMixin, View):
+    login_url = '/accounts/login/'
+
+    def get(self, request):
+        if request.method == 'POST':
+            form = Product(request.POST)
+            if form.is_valid():
+                return HttpResponse('0')
+            else:
+                return HttpResponse('1')
+        else:
+            return HttpResponse('2')
+
+
+

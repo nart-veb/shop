@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block content %}
+
+<div class="container">
+
+    <table>
+        {% for item in card_item_list %}
+
+        <tr style="border-top:1px solid black;display:block; padding:15px;  margin-top:30px;"><td>наименование : {{item.product}} |</td><td> количество : {{item.count}} |</td><td>сумма: {{item.sum}} руб.</td></tr>
+        {% endfor %}
+
+    </table>
+     <a href="">Оплатить</a>
+</div>
+
+
+
+{% endblock content %}

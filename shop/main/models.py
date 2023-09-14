@@ -1,5 +1,6 @@
 from django.db import models
-from user.models import User
+# from user.models import User
+from django.contrib.auth.models import User
 
 
 class Firm(models.Model):
@@ -107,7 +108,7 @@ class Basket(models.Model):
     status = models.BooleanField(verbose_name="Статус", default=False)
 
     def __str__(self):
-        return self.user
+        return self.user.username
 
     class Meta:
         verbose_name = "корзину"
@@ -119,10 +120,10 @@ class CardItem(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     basket = models.ForeignKey(Basket, on_delete=models.CASCADE)
     count = models.IntegerField("Количество")
-    sum = models.DecimalField(decimal_places=2, max_digits=2)
+    sum = models.DecimalField(decimal_places=2, max_digits=8)
 
     def __str__(self):
-        return self.product
+        return self.product.title
 
     class Meta:
         verbose_name = "карточку"
